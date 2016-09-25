@@ -14,5 +14,10 @@
     },
     "require-dev": {
         "gentry/gentry": "^0.10.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ornament\\Bitflag\\": "./src"
+        }
     }
 }
