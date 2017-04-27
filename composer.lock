@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "84b17c8cd7abd741fd69868b2eb66899",
+    "hash": "52760bc10bebbd6293dba9047ba5ae96",
     "content-hash": "5984e69772cf20fc414a6f4b206d6d93",
     "packages": [
         {
             "name": "ornament/core",
-            "version": "0.10.0",
+            "version": "0.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ornament-orm/core.git",
-                "reference": "e527ff017a2173753b9b62ec88eae8bc5c170422"
+                "reference": "18f887d123d6e26695b61d760302b7a6199510d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ornament-orm/core/zipball/e527ff017a2173753b9b62ec88eae8bc5c170422",
-                "reference": "e527ff017a2173753b9b62ec88eae8bc5c170422",
+                "url": "https://api.github.com/repos/ornament-orm/core/zipball/18f887d123d6e26695b61d760302b7a6199510d6",
+                "reference": "18f887d123d6e26695b61d760302b7a6199510d6",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "orm",
                 "php"
             ],
-            "time": "2017-04-27 11:34:58"
+            "time": "2017-04-27 14:02:55"
         },
         {
             "name": "zeptech/annotations",
