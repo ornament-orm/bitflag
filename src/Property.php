@@ -4,6 +4,7 @@ namespace Ornament\Bitflag;
 
 use JsonSerializable;
 use StdClass;
+use Ornament\Core\Decorator;
 
 /**
  * Object to emulate a bitflag in Ornament models.
@@ -22,25 +23,25 @@ use StdClass;
  * $model->status->on = false; // bit 1 is now off (status &= ~1)
  * </code>
  */
-class Property implements JsonSerializable
+class Property extends Decorator implements JsonSerializable
 {
-    /** Private storage for the actual intager value. */
-    private $source;
-    /** Private storage of the name/bitvalue map for this object. */
+    /**
+     * @var array
+     * Private storage of the name/bitvalue map for this object.
+     */
     private $map;
 
     /**
      * Constructor. Normally called by models based on the @Bitflag annotation,
      * but you can also construct manually.
      *
-     * @param integer $source The initial value of the byte storing the
-     *  bitflags.
+     * @param int $source The initial value of the byte storing the bitflags.
      * @param array $valueMap Key/value pair of bit names/values, e.g. "on" =>
      *  1, "female" => 2 etc.
      */
-    public function __construct($source, array $valueMap = [])
+    public function __construct(int $source, array $valueMap = [])
     {
-        $this->source = (int)"$source";
+        parent::__construct($source);
         $this->map = $valueMap;
     }
 
@@ -49,9 +50,9 @@ class Property implements JsonSerializable
      * in the $valueMap used during construction.
      *
      * @param string $prop Name of the bit to set.
-     * @param mixed $value Truthy to turn on, falsy to turn off.
+     * @param bool $value True to turn on, false to turn off.
      */
-    public function __set($prop, $value)
+    public function __set(string $prop, bool $value)
     {
         if (!isset($this->map[$prop])) {
             return;
@@ -67,9 +68,9 @@ class Property implements JsonSerializable
      * Magic getter to retrieve the status of a bit.
      *
      * @param string $prop Name of the bit to check.
-     * @return boolen True if the bit is on, false if off or unknown.
+     * @return bool True if the bit is on, false if off or unknown.
      */
-    public function __get($prop)
+    public function __get($prop) : bool
     {
         if (!isset($this->map[$prop])) {
             return false;
@@ -81,10 +82,9 @@ class Property implements JsonSerializable
      * Check if a bit exists in this bitflag.
      *
      * @param string $prop Name of the bit to check.
-     * @return boolean True if the bit is known in this bitflag, false
-     *  otherwise.
+     * @return bool True if the bit is known in this bitflag, false otherwise.
      */
-    public function __isset($prop)
+    public function __isset($prop) : bool
     {
         return isset($this->map[$prop]);
     }
@@ -94,7 +94,7 @@ class Property implements JsonSerializable
      *
      * @return string Integer casted to string containing the current value.
      */
-    public function __toString()
+    public function __toString() : string
     {
         return (string)$this->source;
     }
@@ -105,7 +105,7 @@ class Property implements JsonSerializable
      *
      * @return StdClass A standard class suitable for json_encode.
      */
-    public function jsonSerialize()
+    public function jsonSerialize() : StdClass
     {
         $ret = new StdClass;
         foreach ($this->map as $key => $value) {
