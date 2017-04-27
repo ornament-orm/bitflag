@@ -1,65 +1,37 @@
 <?php
 
-class BitflagModel implements JsonSerializable
-{
-    use Ornament\JsonModel;
+namespace Ornament\Tests;
 
-    /** @Private */
-    private $pdo;
+use Ornament\Demo\BitflagModel;
+use Ornament\Bitflag\Property;
+use StdClass;
 
-    /**
-     * @PrimaryKey
-     * @Bitflag nice = 1, cats = 2, code = 4
-     */
-    public $status;
-
-    public function __construct()
-    {
-        $this->pdo = $GLOBALS['pdo'];
-        $this->addAdapter(new Ornament\Adapter\Pdo($this->pdo));
-    }
-}
-
-class BitflagTest extends PHPUnit_Extensions_Database_TestCase
+class BitflagTest
 {
     private static $pdo;
     private $conn;
 
     /**
-     * @covers Ornament\Bitflag
+     * On an annotated model, @var is turned into a bitflag {?}. After changing
+     * some flags, they are correctly persisted {?} and again after re-changing
+     * {?}. The model can be serialized after which it is a StdClass {?} that
+     * contains the correct settings {?} {?} {?}.
      */
     public function testBitflags()
     {
-        $model = new BitflagModel(self::$pdo);
-        $this->assertInstanceOf('Ornament\Bitflag', $model->status);
+        $model = new BitflagModel;
+        yield assert($model->status instanceof Property);
         $model->status->code = true;
         $model->status->cats = true;
-        $this->assertEquals(6, "{$model->status}");
+        yield assert("{$model->status}" === "6");
         $model->status->code = false;
         $model->status->nice = true;
-        $this->assertEquals(3, "{$model->status}");
-        $exported = $model->jsonSerialize();
-        $this->assertFalse($exported->status->code);
-        $this->assertTrue($exported->status->cats);
-        $this->assertTrue($exported->status->nice);
-    }
-
-    public function getConnection()
-    {
-        if ($this->conn === null) {
-            if (!isset(self::$pdo)) {
-                self::$pdo = new PDO('sqlite::memory:');
-                self::$pdo->exec(file_get_contents(__DIR__.'/schema.sql'));
-                $GLOBALS['pdo'] = self::$pdo;
-            }
-            $this->conn = $this->createDefaultDBConnection(self::$pdo, 'test');
-        }
-        return $this->conn;
-    }
-    
-    public function getDataSet()
-    {
-        return $this->createXmlDataSet(__DIR__.'/dataset.xml');
+        yield assert("{$model->status}" === "3");
+        $exported = $model->status->jsonSerialize();
+        yield assert($exported instanceof StdClass);
+        yield assert($exported->code == false);
+        yield assert($exported->cats == true);
+        yield assert($exported->nice == true);
     }
 }
 
