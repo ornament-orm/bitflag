@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "ornament/ornament": "^0.9.1"
+        "ornament/core": "^0.10.0"
     },
     "require-dev": {
         "gentry/gentry": "^0.10.2"
