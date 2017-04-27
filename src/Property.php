@@ -39,9 +39,9 @@ class Property extends Decorator implements JsonSerializable
      * @param array $valueMap Key/value pair of bit names/values, e.g. "on" =>
      *  1, "female" => 2 etc.
      */
-    public function __construct(int $source, array $valueMap = [])
+    public function __construct(StdClass $model, string $property, array $valueMap = [])
     {
-        parent::__construct($source);
+        parent::__construct($model, $property);
         $this->map = $valueMap;
     }
 
