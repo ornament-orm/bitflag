@@ -70,7 +70,7 @@ class Property extends Decorator implements JsonSerializable
      * @param string $prop Name of the bit to check.
      * @return bool True if the bit is on, false if off or unknown.
      */
-    public function __get($prop) : bool
+    public function __get(string $prop) : bool
     {
         if (!isset($this->map[$prop])) {
             return false;
@@ -84,7 +84,7 @@ class Property extends Decorator implements JsonSerializable
      * @param string $prop Name of the bit to check.
      * @return bool True if the bit is known in this bitflag, false otherwise.
      */
-    public function __isset($prop) : bool
+    public function __isset(string $prop) : bool
     {
         return isset($this->map[$prop]);
     }
