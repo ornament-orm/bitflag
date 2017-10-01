@@ -3,7 +3,7 @@
 namespace Ornament\Bitflag;
 
 use JsonSerializable;
-use StdClass;
+use stdClass;
 use Ornament\Core\Decorator;
 
 /**
@@ -39,7 +39,7 @@ class Property extends Decorator implements JsonSerializable
      * @param array $valueMap Key/value pair of bit names/values, e.g. "on" =>
      *  1, "female" => 2 etc.
      */
-    public function __construct(StdClass $model, string $property, array $valueMap = [])
+    public function __construct(stdClass $model, string $property, array $valueMap = [])
     {
         parent::__construct($model, $property);
         $this->map = $valueMap;
@@ -103,11 +103,11 @@ class Property extends Decorator implements JsonSerializable
      * Export this bitflag as a Json object. All known bits are exported as
      * properties with true or false depending on their status.
      *
-     * @return StdClass A standard class suitable for json_encode.
+     * @return stdClass A standard class suitable for json_encode.
      */
-    public function jsonSerialize() : StdClass
+    public function jsonSerialize() : stdClass
     {
-        $ret = new StdClass;
+        $ret = new stdClass;
         foreach ($this->map as $key => $value) {
             $ret->$key = (bool)($this->source & $value);
         }
