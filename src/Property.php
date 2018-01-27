@@ -3,6 +3,7 @@
 namespace Ornament\Bitflag;
 
 use JsonSerializable;
+use ArrayAccess;
 use stdClass;
 use Ornament\Core\Decorator;
 
@@ -23,7 +24,7 @@ use Ornament\Core\Decorator;
  * $model->status->on = false; // bit 1 is now off (status &= ~1)
  * </code>
  */
-class Property extends Decorator implements JsonSerializable
+class Property extends Decorator implements JsonSerializable, ArrayAccess
 {
     /**
      * @var array
@@ -41,8 +42,42 @@ class Property extends Decorator implements JsonSerializable
      */
     public function __construct(stdClass $model, string $property, array $valueMap = [])
     {
+        if (is_array($model->$property)) {
+            $bit = 0;
+            foreach ($model->$property as $flag) {
+                if (isset($valueMap[$flag])) {
+                    $bit |= $valueMap[$flag];
+                }
+            }
+            $model->$property = $bit;
+        }
         parent::__construct($model, $property);
         $this->map = $valueMap;
+    }
+
+    public function append($value)
+    {
+        $this->__set($value, true);
+    }
+
+    public function offsetExists($index)
+    {
+        return $this->__isset($index);
+    }
+
+    public function offsetSet($index, $value)
+    {
+        $this->__set($index, true);
+    }
+
+    public function offsetGet($index)
+    {
+        return $this->__get($index);
+    }
+
+    public function offsetUnset($index)
+    {
+        $this->__set($index, false);
     }
 
     /**
