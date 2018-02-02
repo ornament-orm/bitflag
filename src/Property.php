@@ -6,6 +6,7 @@ use JsonSerializable;
 use ArrayAccess;
 use stdClass;
 use Ornament\Core\Decorator;
+use ArrayObject;
 
 /**
  * Object to emulate a bitflag in Ornament models.
@@ -42,7 +43,7 @@ class Property extends Decorator implements JsonSerializable, ArrayAccess
      */
     public function __construct(stdClass $model, string $property, array $valueMap = [])
     {
-        if (is_array($model->$property)) {
+        if (is_array($model->$property) || $model->$property instanceof ArrayObject) {
             $bit = 0;
             foreach ($model->$property as $flag) {
                 if (isset($valueMap[$flag])) {
