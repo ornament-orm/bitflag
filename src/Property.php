@@ -3,7 +3,7 @@
 namespace Ornament\Bitflag;
 
 use JsonSerializable;
-use ArrayAccess;
+use ArrayObject;
 use stdClass;
 use Ornament\Core\Decorator;
 
@@ -14,8 +14,8 @@ use Ornament\Core\Decorator;
  * bitflags, e.g. 'status_on = 1', 'status_valid = 2' etc. The Bitflag trait
  * makes this easy.
  *
- * Annotate the bitflag property with @Bitflag followed by a map of names/flags,
- * e.g. @Bitflag on = 1, valid = 2
+ * Annotate the bitflag property with @var Ornament\Bitflag\Property constructed
+ * with a map of names/flags, e.g. @construct on = 1, valid = 2
  *
  * <code>
  * // Now this works, assuming `$model` is the instance:
@@ -24,7 +24,7 @@ use Ornament\Core\Decorator;
  * $model->status->on = false; // bit 1 is now off (status &= ~1)
  * </code>
  */
-class Property extends Decorator implements JsonSerializable, ArrayAccess
+class Property extends Decorator implements JsonSerializable
 {
     /**
      * @var array
@@ -131,6 +131,13 @@ class Property extends Decorator implements JsonSerializable, ArrayAccess
      */
     public function __toString() : string
     {
+        if ($this->source instanceof ArrayObject || is_array($this->source)) {
+            $src = $this->source;
+            $this->source = 0;
+            foreach ($src as $map) {
+                $this->source |= $this->map[$map];
+            }
+        }
         return (string)$this->source;
     }
 
