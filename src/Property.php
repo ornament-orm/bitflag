@@ -6,7 +6,6 @@ use JsonSerializable;
 use ArrayObject;
 use stdClass;
 use Ornament\Core\Decorator;
-use ArrayObject;
 
 /**
  * Object to emulate a bitflag in Ornament models.
@@ -37,13 +36,14 @@ class Property extends Decorator implements JsonSerializable
      * Constructor. Normally called by models based on the @Bitflag annotation,
      * but you can also construct manually.
      *
-     * @param int $source The initial value of the byte storing the bitflags.
+     * @param object $model The containing model.
+     * @param string $property The property on $model containing the bitflags.
      * @param array $valueMap Key/value pair of bit names/values, e.g. "on" =>
      *  1, "female" => 2 etc.
      */
-    public function __construct(stdClass $model, string $property, array $valueMap = [])
+    public function __construct(object $model, string $property, array $valueMap = [])
     {
-        if (is_array($model->$property) || $model->$property instanceof ArrayObject) {
+        if (is_array($model->$property)) {
             $bit = 0;
             foreach ($model->$property as $flag) {
                 if (isset($valueMap[$flag])) {
@@ -93,6 +93,15 @@ class Property extends Decorator implements JsonSerializable
         if (!isset($this->map[$prop])) {
             return;
         }
+        if (!is_int($this->source)) {
+            $bit = 0;
+            foreach ($this->source as $value) {
+                if (isset($this->map[$value])) {
+                    $bit |= $this->map[$value];
+                }
+            }
+            $this->source = $bit;
+        }
         if ($value) {
             $this->source |= $this->map[$prop];
         } else {
@@ -104,9 +113,9 @@ class Property extends Decorator implements JsonSerializable
      * Magic getter to retrieve the status of a bit.
      *
      * @param string $prop Name of the bit to check.
-     * @return bool True if the bit is on, false if off or unknown.
+     * @return bool|null True if the bit is on, false if off or null if unknown.
      */
-    public function __get(string $prop) : bool
+    public function __get(string $prop) :? bool
     {
         if (!isset($this->map[$prop])) {
             return false;
