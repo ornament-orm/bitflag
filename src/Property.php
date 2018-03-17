@@ -93,15 +93,7 @@ class Property extends Decorator implements JsonSerializable
         if (!isset($this->map[$prop])) {
             return;
         }
-        if (!is_int($this->source)) {
-            $bit = 0;
-            foreach ($this->source as $value) {
-                if (isset($this->map[$value])) {
-                    $bit |= $this->map[$value];
-                }
-            }
-            $this->source = $bit;
-        }
+        $this->source = (int)"$this";
         if ($value) {
             $this->source |= $this->map[$prop];
         } else {
@@ -118,9 +110,9 @@ class Property extends Decorator implements JsonSerializable
     public function __get(string $prop) :? bool
     {
         if (!isset($this->map[$prop])) {
-            return false;
+            return null;
         }
-        return (bool)($this->source & $this->map[$prop]);
+        return (bool)((int)"$this" & $this->map[$prop]);
     }
 
     /**
@@ -161,7 +153,7 @@ class Property extends Decorator implements JsonSerializable
     {
         $ret = new stdClass;
         foreach ($this->map as $key => $value) {
-            $ret->$key = (bool)($this->source & $value);
+            $ret->$key = (bool)((int)"$this" & $value);
         }
         return $ret;
     }
