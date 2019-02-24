@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "ornament/core": "^0.11.0"
+        "php": ">=7.3",
+        "ornament/core": "^0.12.0"
     },
     "require-dev": {
         "gentry/gentry": "^0.12.0",
