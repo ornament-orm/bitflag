@@ -21,11 +21,5 @@
         "psr-4": {
             "Ornament\\Bitflag\\": "./src"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Ornament\\Tests\\": "./tests",
-            "Ornament\\Demo\\": "./demo"
-        }
     }
 }
