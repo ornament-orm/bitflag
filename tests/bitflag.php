@@ -1,11 +1,19 @@
 <?php
 
-use Ornament\Demo\BitflagModel;
 use Ornament\Bitflag\Property;
+use Ornament\Core\Model;
 
-return function ($test) : Generator {
-    $test->beforeEach(function () use (&$model) {
-        $model = new BitflagModel;
+return function () : Generator {
+    $this->beforeEach(function () use (&$model) {
+        $model = new class {
+            use Model;
+
+            /**
+             * @var Ornament\Bitflag\Property
+             * @construct nice = 1, cats = 2, code = 4
+             */
+            public $status = 0;
+        };
     });
 
     /** On an annotated model, @var is turned into a bitflag. */
