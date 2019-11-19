@@ -159,6 +159,24 @@ class Property extends Decorator implements JsonSerializable
     }
 
     /**
+     * Like jsonSerialize, only returns a filtered array of names/values where
+     * the bit resolved to true.
+     *
+     * @return array
+     */
+    public function getArrayCopy() : array
+    {
+        $ret = [];
+        $source = (int)"$this";
+        foreach ($this->map as $key => $value) {
+            if ($source & $value) {
+                $ret[$key] = $value;
+            }
+        }
+        return $ret;
+    }
+
+    /**
      * Set all flags to "off". Useful for reinitialization.
      *
      * @return void
