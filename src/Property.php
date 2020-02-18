@@ -41,18 +41,9 @@ class Property extends Decorator implements JsonSerializable
      * @param array $valueMap Key/value pair of bit names/values, e.g. "on" =>
      *  1, "female" => 2 etc.
      */
-    public function __construct(object $model, string $property, array $valueMap = [])
+    public function __construct(int $value, array $valueMap = [])
     {
-        if (is_array($model->$property)) {
-            $bit = 0;
-            foreach ($model->$property as $flag) {
-                if (isset($valueMap[$flag])) {
-                    $bit |= $valueMap[$flag];
-                }
-            }
-            $model->$property = $bit;
-        }
-        parent::__construct($model, $property);
+        parent::__construct($value);
         $this->map = $valueMap;
     }
 
@@ -124,23 +115,6 @@ class Property extends Decorator implements JsonSerializable
     public function __isset(string $prop) : bool
     {
         return isset($this->map[$prop]);
-    }
-
-    /**
-     * Return the original source byte as a string.
-     *
-     * @return string Integer casted to string containing the current value.
-     */
-    public function __toString() : string
-    {
-        if ($this->source instanceof ArrayObject || is_array($this->source)) {
-            $src = $this->source;
-            $this->source = 0;
-            foreach ($src as $map) {
-                $this->source |= $this->map[$map];
-            }
-        }
-        return (string)$this->source;
     }
 
     /**
