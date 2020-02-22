@@ -83,7 +83,7 @@ abstract class Property extends Decorator implements JsonSerializable
         foreach ($this->_properties as $property) {
             if ($property->getName() == $prop) {
                 $property->setAccessible(true);
-                $modifier = $property->getValue();
+                $modifier = $property->getValue($this);
                 break;
             }
         }
@@ -106,7 +106,7 @@ abstract class Property extends Decorator implements JsonSerializable
         $modifier = 0;
         foreach ($this->_properties as $property) {
             if ($property->getName() == $prop) {
-                $modifier = $property->getValue();
+                $modifier = $property->getValue($this);
                 break;
             }
         }
