@@ -29,9 +29,9 @@ use ReflectionProperty;
  *
  * class Status extends Property
  * {
- *     protected int $on = 1;
+ *     protected static int $on = 1;
  *
- *     protected int $initialized = 2;
+ *     protected static int $initialized = 2;
  * }
  *
  * class Model
@@ -67,7 +67,7 @@ abstract class Property extends Decorator implements JsonSerializable
     public function __construct(int $source)
     {
         parent::__construct($source);
-        $this->_properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_STATIC & ReflectionProperty::IS_PROTECTED);
+        $this->_properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_STATIC | ReflectionProperty::IS_PROTECTED);
     }
 
     /**
@@ -82,6 +82,7 @@ abstract class Property extends Decorator implements JsonSerializable
         $modifier = 0;
         foreach ($this->_properties as $property) {
             if ($property->getName() == $prop) {
+                $property->setAccessible(true);
                 $modifier = $property->getValue();
                 break;
             }
@@ -141,8 +142,9 @@ abstract class Property extends Decorator implements JsonSerializable
     {
         $ret = new stdClass;
         foreach ($this->_properties as $property) {
+            $property->setAccessible(true);
             $key = $property->getName();
-            $value = $property->getValue();
+            $value = $property->getValue($this);
             $ret->$key = (bool)($this->_source & $value);
         }
         return $ret;
@@ -158,8 +160,9 @@ abstract class Property extends Decorator implements JsonSerializable
     {
         $ret = [];
         foreach ($this->_properties as $property) {
+            $property->setAccessible(true);
             $key = $property->getName();
-            $value = $property->getValue();
+            $value = $property->getValue($this);
             if ($this->_source & $value) {
                 $ret[$key] = $value;
             }
