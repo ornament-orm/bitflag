@@ -52,4 +52,7 @@ var_dump($model->status->initialized); // true, since 2 & 2 = 2
 ```
 
 Bitflag properties also support JSON serialization (via
-`Ornament\Bitflag\Property::jsonSerialize()`).
+`Ornament\Bitflag\Property::jsonSerialize()`). A map of `true`/`false` values
+will be exported. Similarly, the `getArrayCopy` method will return a hash of
+flags/bits where the bit was set to true.
+
