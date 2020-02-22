@@ -58,7 +58,13 @@ abstract class Property extends Decorator implements JsonSerializable
     /** @var ReflectionProperty[] */
     private $_properties;
 
-    public function __construct($source)
+    /**
+     * Constructor.
+     *
+     * @paran int $source
+     * @return void
+     */
+    public function __construct(int $source)
     {
         parent::__construct($source);
         $this->_properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_STATIC & ReflectionProperty::IS_PROTECTED);
