@@ -3,16 +3,22 @@
 use Ornament\Bitflag\Property;
 use Ornament\Core\Model;
 
+class Status extends Property
+{
+    protected $nice = 1;
+
+    protected $cats = 2;
+
+    protected $code = 4;
+}
+
 return function () : Generator {
     $this->beforeEach(function () use (&$model) {
-        $model = new class {
+        $model = new class(['status' => 0]) {
             use Model;
 
-            /**
-             * @var Ornament\Bitflag\Property
-             * @construct nice = 1, cats = 2, code = 4
-             */
-            public $status = 0;
+            /** @var Status */
+            public $status;
         };
     });
 
