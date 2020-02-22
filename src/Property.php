@@ -143,7 +143,7 @@ abstract class Property extends Decorator implements JsonSerializable
         foreach ($this->_properties as $property) {
             $key = $property->getName();
             $value = $property->getValue();
-            $ret->$key = (bool)((int)"$this" & $value);
+            $ret->$key = (bool)($this->_source & $value);
         }
         return $ret;
     }
@@ -152,16 +152,15 @@ abstract class Property extends Decorator implements JsonSerializable
      * Like jsonSerialize, only returns a filtered array of names/values where
      * the bit resolved to true.
      *
-     * @return array
+     * @return int[]
      */
     public function getArrayCopy() : array
     {
         $ret = [];
-        $source = (int)"$this";
         foreach ($this->_properties as $property) {
             $key = $property->getName();
             $value = $property->getValue();
-            if ($source & $value) {
+            if ($this->_source & $value) {
                 $ret[$key] = $value;
             }
         }
@@ -176,6 +175,17 @@ abstract class Property extends Decorator implements JsonSerializable
     public function allOff()
     {
         $this->_source = 0;
+    }
+
+    /**
+     * Gets the bit associated with a particular flag, if defined.
+     *
+     * @param string $flag
+     * @return int|null
+     */
+    public function getBit(string $flag) :? int
+    {
+        return $this->getArrayCopy()[$flag] ?? null;
     }
 }
 
