@@ -5,11 +5,11 @@ use Ornament\Core\Model;
 
 class Status extends Property
 {
-    protected $nice = 1;
+    protected static $nice = 1;
 
-    protected $cats = 2;
+    protected static $cats = 2;
 
-    protected $code = 4;
+    protected static $code = 4;
 }
 
 return function () : Generator {
@@ -24,7 +24,7 @@ return function () : Generator {
 
     /** On an annotated model, @var is turned into a bitflag. */
     yield function () use (&$model) {
-        assert($model->status instanceof Property);
+        assert($model->status instanceof Status);
         $model->status->code = true;
         $model->status->cats = true;
         assert("{$model->status}" === "6");
