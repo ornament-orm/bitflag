@@ -25,7 +25,6 @@ return function () : Generator {
     /** On an annotated model, @var is turned into a bitflag. */
     yield function () use (&$model) {
         assert($model->status instanceof Status);
-        var_dump($model->status);
         $model->status->code = true;
         $model->status->cats = true;
         assert("{$model->status}" === "6");
