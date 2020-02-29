@@ -79,13 +79,15 @@ abstract class Property extends Decorator implements JsonSerializable
      * Magic getter to retrieve the status of a bit.
      *
      * @param string $prop Name of the bit to check.
-     * @return bool|null True if the bit is on, false if off or null if unknown.
+     * @return bool True if the bit is on, false if off.
+     * @throws Ornament\Bitflag\FlagNotDefinedException
      */
     public function __get(string $prop) :? bool
     {
-        return isset(static::OPTIONS[$prop])
-            ? (bool)((int)"$this" & static::OPTIONS[$prop])
-            : null;
+        if (!isset(static::OPTIONS[$prop])) {
+            throw new FlagNotDefinedException($prop);
+        }
+        return (bool)((int)"$this" & static::OPTIONS[$prop]);
     }
 
     /**
