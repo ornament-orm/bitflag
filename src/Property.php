@@ -19,8 +19,8 @@ use ReflectionProperty;
  * Annotate the bitflag property with @var Ornament\Bitflag\Property OR (as of
  * PHP 7.4) type hint it as such.
  *
- * The supported flags should be defined as `protected static [int]` properties
- * on the implementing class. This should extend this abstract base class. These
+ * The supported flags should be defined as `protected const OPTIONS = [MAP] on
+ * the implementing class. This should extend this abstract base class. These
  * are now automagically exposed as `$property->name_of_property [true/false]`.
  *
  * <code>
@@ -29,9 +29,7 @@ use ReflectionProperty;
  *
  * class Status extends Property
  * {
- *     protected static int $on = 1;
- *
- *     protected static int $initialized = 2;
+ *     protected const OPTIONS = ['on' => 1, 'initialized' => 2];
  * }
  *
  * class Model
@@ -52,23 +50,8 @@ use ReflectionProperty;
  */
 abstract class Property extends Decorator implements JsonSerializable
 {
-    /** @var int */
-    protected $_source = 0;
-
-    /** @var ReflectionProperty[] */
-    private $_properties;
-
-    /**
-     * Constructor.
-     *
-     * @paran int $source
-     * @return void
-     */
-    public function __construct(int $source)
-    {
-        parent::__construct($source);
-        $this->_properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_STATIC | ReflectionProperty::IS_PROTECTED);
-    }
+    /** @var int [] */
+    protected const OPTIONS = [];
 
     /**
      * Magic setter. Silently fails if the specified property was not available
@@ -76,22 +59,19 @@ abstract class Property extends Decorator implements JsonSerializable
      *
      * @param string $prop Name of the bit to set.
      * @param bool $value True to turn on, false to turn off.
+     * @throws Ornament\Bitflag\FlagNotDefinedException
      */
     public function __set(string $prop, bool $value)
     {
         $modifier = 0;
-        foreach ($this->_properties as $property) {
-            if ($property->getName() == $prop) {
-                $property->setAccessible(true);
-                $modifier = $property->getValue($this);
-                break;
-            }
+        if (!isset(static::OPTIONS[$prop])) {
+            throw new FlagNotDefinedException($prop);
         }
         $this->_source = (int)"$this";
         if ($value) {
-            $this->_source |= $modifier;
+            $this->_source |= static::OPTIONS[$prop];
         } else {
-            $this->_source &= ~$modifier;
+            $this->_source &= ~static::OPTIONS[$prop];
         }
     }
 
@@ -103,18 +83,9 @@ abstract class Property extends Decorator implements JsonSerializable
      */
     public function __get(string $prop) :? bool
     {
-        $modifier = 0;
-        foreach ($this->_properties as $property) {
-            if ($property->getName() == $prop) {
-                $property->setAccessible(true);
-                $modifier = $property->getValue($this);
-                break;
-            }
-        }
-        if (!$modifier) {
-            return null;
-        }
-        return (bool)((int)"$this" & $modifier);
+        return isset(static::OPTIONS[$prop])
+            ? (bool)((int)"$this" & static::OPTIONS[$prop])
+            : null;
     }
 
     /**
@@ -125,12 +96,7 @@ abstract class Property extends Decorator implements JsonSerializable
      */
     public function __isset(string $prop) : bool
     {
-        foreach ($this->_properties as $property) {
-            if ($property->getName() == $prop) {
-                return true;
-            }
-        }
-        return false;
+        return isset(static::OPTIONS[$prop]);
     }
 
     /**
@@ -142,11 +108,8 @@ abstract class Property extends Decorator implements JsonSerializable
     public function jsonSerialize() : stdClass
     {
         $ret = new stdClass;
-        foreach ($this->_properties as $property) {
-            $property->setAccessible(true);
-            $key = $property->getName();
-            $value = $property->getValue($this);
-            $ret->$key = (bool)($this->_source & $value);
+        foreach (static::OPTIONS as $name => $bit) {
+            $ret->$name = (bool)($this->_source & $bit);
         }
         return $ret;
     }
@@ -160,12 +123,9 @@ abstract class Property extends Decorator implements JsonSerializable
     public function getArrayCopy() : array
     {
         $ret = [];
-        foreach ($this->_properties as $property) {
-            $property->setAccessible(true);
-            $key = $property->getName();
-            $value = $property->getValue($this);
-            if ($this->_source & $value) {
-                $ret[$key] = $value;
+        foreach (static::OPTIONS as $name => $bit) {
+            if ($this->_source & $bit) {
+                $ret[$name] = $bit;
             }
         }
         return $ret;
