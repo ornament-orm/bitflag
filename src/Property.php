@@ -87,7 +87,7 @@ abstract class Property extends Decorator implements JsonSerializable
         if (!isset(static::OPTIONS[$prop])) {
             throw new FlagNotDefinedException($prop);
         }
-        return (bool)((int)"$this" & static::OPTIONS[$prop]);
+        return (int)"$this" & static::OPTIONS[$prop] === static::OPTIONS[$prop];
     }
 
     /**
