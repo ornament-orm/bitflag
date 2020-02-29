@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.3",
-        "ornament/core": "^0.14.0"
+        "ornament/core": "^0.15.0"
     },
     "require-dev": {
         "gentry/gentry": "^0.13.0",
