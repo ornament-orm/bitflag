@@ -82,12 +82,12 @@ abstract class Property extends Decorator implements JsonSerializable
      * @return bool True if the bit is on, false if off.
      * @throws Ornament\Bitflag\FlagNotDefinedException
      */
-    public function __get(string $prop) :? bool
+    public function __get(string $prop) : bool
     {
         if (!isset(static::OPTIONS[$prop])) {
             throw new FlagNotDefinedException($prop);
         }
-        return (int)"$this" & static::OPTIONS[$prop] === static::OPTIONS[$prop];
+        return ((int)"$this" & static::OPTIONS[$prop]) === static::OPTIONS[$prop];
     }
 
     /**
