@@ -54,6 +54,23 @@ abstract class Property extends Decorator implements JsonSerializable
     protected const OPTIONS = [];
 
     /**
+     * Cfg. Ornament models, allow instantiation from an iterable containing all
+     * flags that should be set to `true`.
+     *
+     * @param iterable $iterable
+     * @return self
+     */
+    public static function fromIterable(iterable $iterable) : self
+    {
+        $class = get_called_class();
+        $property = new $class(0);
+        foreach ($iterable as $flag) {
+            $property->$flag = true;
+        }
+        return $property;
+    }
+
+    /**
      * Magic setter. Silently fails if the specified property was not available
      * in the $valueMap used during construction.
      *
@@ -151,7 +168,7 @@ abstract class Property extends Decorator implements JsonSerializable
      */
     public function getBit(string $flag) :? int
     {
-        return $this->getArrayCopy()[$flag] ?? null;
+        return self::OPTIONS[$flag] ?? null;
     }
 }
 
