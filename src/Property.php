@@ -53,6 +53,13 @@ abstract class Property extends Decorator implements JsonSerializable
     /** @var int [] */
     protected const OPTIONS = [];
 
+    protected $_source = 0;
+
+    public function __construct($source)
+    {
+        parent::__construct((int)$source);
+    }
+
     /**
      * Cfg. Ornament models, allow instantiation from an iterable containing all
      * flags that should be set to `true`.
