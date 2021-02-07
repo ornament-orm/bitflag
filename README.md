@@ -5,7 +5,8 @@ For a model Foo with a property 'status', we often want to define a number of
 bitflags, e.g. 'status_on = 1', 'status_valid = 2' etc. The Bitflag decorator
 makes this easy.
 
-Annotate the bitflag property with `@var Ornament\Bitflag\Property` OR (as of
+Create a class extending `Ornament\Bitflag\Property` defining the desired flags.
+Annotate the bitflag property with `@var Your\Implementing\Class` OR (as of
 PHP 7.4) type hint it as such.
 
 To define allowed bitflags and their aliases, the `protected` const OPTIONS is
