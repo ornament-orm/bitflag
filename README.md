@@ -8,10 +8,16 @@ makes this easy.
 Annotate the bitflag property with `@var Ornament\Bitflag\Property` OR (as of
 PHP 7.4) type hint it as such.
 
-The supported flags should be defined as `protected static [int]` properties
-on the implementing class. This should extend this abstract base class. These
-are now automagically exposed as `$property->name_of_property [true/false]`.
+To define allowed bitflags and their aliases, the `protected` const OPTIONS is
+used. It should contain a hash of name/bit pairs.
 
+All defined flags are now magically available for getting and setting as
+properties on the class instance:
+
+```php
+<?php
+
+```
 ```php
 <?php
 
@@ -20,14 +26,7 @@ use Ornament\Bitflag\Property;
 
 class Status extends Property
 {
-    /**
-     * For PHP < 7.4, use:
-     *
-     * @var int
-     */
-    protected int $on = 1;
-
-    protected int $initialized = 2;
+    protected const OPTIONS = ['on' => 1, 'initialized' => 2];
 }
 
 class Model
@@ -42,7 +41,7 @@ class Model
     public Status $status;
 }
 
-$model = new Model(['status' => 3]);
+$model = Model::fromIterable(['status' => 3]);
 
 // Now this works, assuming `$model` is the instance:
 var_dump($model->status->on); // true in this example, since 3 & 1 = 1
@@ -55,4 +54,29 @@ Bitflag properties also support JSON serialization (via
 `Ornament\Bitflag\Property::jsonSerialize()`). A map of `true`/`false` values
 will be exported. Similarly, the `getArrayCopy` method will return a hash of
 flags/bits where the bit was set to true.
+
+## Accessing the underlying bit value
+One may use the `getBit($property)` method to access the underlying bit value of
+a property. In the above example, `$model->status->getBit('on')` would yield
+`1`.
+
+An alternative strategy would be to define all bitflags as `public const`ants on
+the bitflag property class, and reference those in the `OPTIONS` definition:
+
+```php
+<?php
+
+class Status extends Ornament\Bitflag\Property
+{
+    public const ON = 1;
+
+    public const INITIALIZED = 2;
+
+    protected const OPTIONS = [
+        'on' => Status::ON,
+        'initialized' => Status::INITIALIZED,
+    ];
+}
+
+```
 
