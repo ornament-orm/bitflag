@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be5b690160cc29932835d9a80ee4259d",
+    "content-hash": "72f12771101a7b8e859abc0d71dfe983",
     "packages": [
         {
             "name": "ornament/core",
@@ -61,25 +61,24 @@
     "packages-dev": [
         {
             "name": "codger/generate",
-            "version": "0.9.9",
+            "version": "0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codger-php/generate.git",
-                "reference": "5ebf7282db1a0af18fe114dca08eba8f6d06af5a"
+                "reference": "32a60f83bba63ee0ea80049f91d74766b67fb221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codger-php/generate/zipball/5ebf7282db1a0af18fe114dca08eba8f6d06af5a",
-                "reference": "5ebf7282db1a0af18fe114dca08eba8f6d06af5a",
+                "url": "https://api.github.com/repos/codger-php/generate/zipball/32a60f83bba63ee0ea80049f91d74766b67fb221",
+                "reference": "32a60f83bba63ee0ea80049f91d74766b67fb221",
                 "shasum": ""
             },
             "require": {
-                "monolyth/cliff": "^0.6.0",
                 "php": ">=7.3",
-                "twig/twig": "^2|^3"
+                "twig/twig": "^2.7"
             },
             "require-dev": {
-                "toast/unit": "^2.0"
+                "toast/unit": "^1.3"
             },
             "bin": [
                 "bin/codger"
@@ -104,30 +103,30 @@
             "description": "Code generator, base framework",
             "support": {
                 "issues": "https://github.com/codger-php/generate/issues",
-                "source": "https://github.com/codger-php/generate/tree/master"
+                "source": "https://github.com/codger-php/generate/tree/0.7.2"
             },
-            "time": "2020-01-03T13:01:51+00:00"
+            "time": "2019-10-05T16:16:03+00:00"
         },
         {
             "name": "codger/php",
-            "version": "0.9.9",
+            "version": "0.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codger-php/php.git",
-                "reference": "0e71bfb48698d2e9485ab95e0f74cc4346ca9e76"
+                "reference": "d532a67994796259bd3ff28ce683169175d70999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codger-php/php/zipball/0e71bfb48698d2e9485ab95e0f74cc4346ca9e76",
-                "reference": "0e71bfb48698d2e9485ab95e0f74cc4346ca9e76",
+                "url": "https://api.github.com/repos/codger-php/php/zipball/d532a67994796259bd3ff28ce683169175d70999",
+                "reference": "d532a67994796259bd3ff28ce683169175d70999",
                 "shasum": ""
             },
             "require": {
-                "codger/generate": "^0.9.9",
+                "codger/generate": "^0.7.0",
                 "composer/composer": "^1.7"
             },
             "require-dev": {
-                "toast/unit": "^2.0"
+                "toast/unit": "^1.3"
             },
             "type": "library",
             "autoload": {
@@ -150,7 +149,7 @@
                 "issues": "https://github.com/codger-php/php/issues",
                 "source": "https://github.com/codger-php/php/tree/master"
             },
-            "time": "2020-01-03T13:13:14+00:00"
+            "time": "2019-10-05T16:20:55+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -553,21 +552,20 @@
         },
         {
             "name": "gentry/gentry",
-            "version": "0.13.16",
+            "version": "0.13.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gentry-php/gentry.git",
-                "reference": "3cc5a3732e139021e3b697abf98da987493df4a1"
+                "reference": "bdccc6ffd6ee09312f5aaa4a883827546616acd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gentry-php/gentry/zipball/3cc5a3732e139021e3b697abf98da987493df4a1",
-                "reference": "3cc5a3732e139021e3b697abf98da987493df4a1",
+                "url": "https://api.github.com/repos/gentry-php/gentry/zipball/bdccc6ffd6ee09312f5aaa4a883827546616acd8",
+                "reference": "bdccc6ffd6ee09312f5aaa4a883827546616acd8",
                 "shasum": ""
             },
             "require": {
-                "codger/php": "^0.9.7",
-                "monolyth/cliff": "^0.6.0",
+                "codger/php": "^0.7.0",
                 "monomelodies/kingconf": "^1.1.0",
                 "monomelodies/reflex": "^0.3.0",
                 "php": ">=7.3",
@@ -576,7 +574,7 @@
                 "zeptech/annotations": "^1.0.0"
             },
             "require-dev": {
-                "toast/unit": "^2.0"
+                "toast/unit": "^1.3"
             },
             "bin": [
                 "bin/gentry"
@@ -600,9 +598,9 @@
             "description": "PHP unit test generation tools",
             "support": {
                 "issues": "https://github.com/gentry-php/gentry/issues",
-                "source": "https://github.com/gentry-php/gentry/tree/0.13.16"
+                "source": "https://github.com/gentry-php/gentry/tree/0.13.13"
             },
-            "time": "2019-12-24T01:33:04+00:00"
+            "time": "2019-12-20T07:57:53+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -676,26 +674,25 @@
         },
         {
             "name": "monolyth/cliff",
-            "version": "0.6.1",
+            "version": "0.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monolyth-php/cliff.git",
-                "reference": "0b9656cdb6d66285ca185f0fc041e5d3ec3ae6c7"
+                "reference": "15dcc7713354aa83756899080a47b0736d492fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monolyth-php/cliff/zipball/0b9656cdb6d66285ca185f0fc041e5d3ec3ae6c7",
-                "reference": "0b9656cdb6d66285ca185f0fc041e5d3ec3ae6c7",
+                "url": "https://api.github.com/repos/monolyth-php/cliff/zipball/15dcc7713354aa83756899080a47b0736d492fca",
+                "reference": "15dcc7713354aa83756899080a47b0736d492fca",
                 "shasum": ""
             },
             "require": {
                 "monomelodies/reflex": "^0.3.0",
-                "php": ">=7.3",
-                "ulrichsg/getopt-php": "^3.2",
-                "zeptech/annotations": "^1.1"
+                "php": ">=8.1",
+                "ulrichsg/getopt-php": "^3.2"
             },
             "require-dev": {
-                "toast/unit": "^2.0"
+                "phpunit/phpunit": "^9.5"
             },
             "bin": [
                 "bin/cliff"
@@ -720,9 +717,9 @@
             "description": "Command line interface for Monolyth unframework",
             "support": {
                 "issues": "https://github.com/monolyth-php/cliff/issues",
-                "source": "https://github.com/monolyth-php/cliff/tree/0.6.1"
+                "source": "https://github.com/monolyth-php/cliff/tree/0.7.8"
             },
-            "time": "2020-01-01T12:27:13+00:00"
+            "time": "2022-10-05T11:35:22+00:00"
         },
         {
             "name": "monomelodies/kingconf",
@@ -1712,6 +1709,82 @@
             "time": "2022-05-24T11:49:31+00:00"
         },
         {
+            "name": "symfony/polyfill-php72",
+            "version": "v1.26.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php72.git",
+                "reference": "bf44a9fd41feaac72b074de600314a93e2ae78e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/bf44a9fd41feaac72b074de600314a93e2ae78e2",
+                "reference": "bf44a9fd41feaac72b074de600314a93e2ae78e2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.26-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php72\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php72/tree/v1.26.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-24T11:49:31+00:00"
+        },
+        {
             "name": "symfony/polyfill-php73",
             "version": "v1.26.0",
             "source": {
@@ -2178,22 +2251,22 @@
         },
         {
             "name": "toast/unit",
-            "version": "2.1.5",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/toast-php/unit.git",
-                "reference": "f9503a18f9739dce6d07b74399e888bbaba7d858"
+                "reference": "aabdb6913a38b67ef425da7b0f4443dff6f56805"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/toast-php/unit/zipball/f9503a18f9739dce6d07b74399e888bbaba7d858",
-                "reference": "f9503a18f9739dce6d07b74399e888bbaba7d858",
+                "url": "https://api.github.com/repos/toast-php/unit/zipball/aabdb6913a38b67ef425da7b0f4443dff6f56805",
+                "reference": "aabdb6913a38b67ef425da7b0f4443dff6f56805",
                 "shasum": ""
             },
             "require": {
-                "monolyth/cliff": "^0.6.0",
+                "monolyth/cliff": "^0.7.0",
                 "monomelodies/kingconf": "^1.1.0",
-                "php": ">=7.2",
+                "php": ">=8.1",
                 "simoneast/simple-ansi-colors": "^1.0"
             },
             "bin": [
@@ -2218,28 +2291,29 @@
             "description": "Super-simple unit testing for PHP7",
             "support": {
                 "issues": "https://github.com/toast-php/unit/issues",
-                "source": "https://github.com/toast-php/unit/tree/master"
+                "source": "https://github.com/toast-php/unit/tree/2.2.1"
             },
-            "time": "2020-02-22T14:29:32+00:00"
+            "time": "2022-07-07T12:37:51+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v3.4.3",
+            "version": "v2.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "c38fd6b0b7f370c198db91ffd02e23b517426b58"
+                "reference": "ab402673db8746cb3a4c46f3869d6253699f614a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c38fd6b0b7f370c198db91ffd02e23b517426b58",
-                "reference": "c38fd6b0b7f370c198db91ffd02e23b517426b58",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ab402673db8746cb3a4c46f3869d6253699f614a",
+                "reference": "ab402673db8746cb3a4c46f3869d6253699f614a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5",
+                "php": ">=7.1.3",
                 "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-mbstring": "^1.3"
+                "symfony/polyfill-mbstring": "^1.3",
+                "symfony/polyfill-php72": "^1.8"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -2248,10 +2322,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "2.15-dev"
                 }
             },
             "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                },
                 "psr-4": {
                     "Twig\\": "src/"
                 }
@@ -2284,7 +2361,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.4.3"
+                "source": "https://github.com/twigphp/Twig/tree/v2.15.3"
             },
             "funding": [
                 {
@@ -2296,7 +2373,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-28T08:42:51+00:00"
+            "time": "2022-09-28T08:40:08+00:00"
         },
         {
             "name": "ulrichsg/getopt-php",
@@ -2402,7 +2479,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3"
+        "php": ">=8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
