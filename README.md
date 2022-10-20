@@ -34,11 +34,6 @@ class Model
 {
     use Core\Model;
 
-    /**
-     * For PHP < 7.4:
-     *
-     * @var Status
-     */
     public Status $status;
 }
 
