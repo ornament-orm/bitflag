@@ -17,12 +17,11 @@ return function () : Generator {
         $model = new class(['status' => 0]) {
             use Model;
 
-            /** @var Status */
-            public $status;
+            public Status $status;
         };
     });
 
-    /** On an annotated model, @var is turned into a bitflag. */
+    /** On a type hinted model, @var is turned into a bitflag. */
     yield function () use (&$model) {
         assert($model->status instanceof Status);
         $model->status->code = true;
