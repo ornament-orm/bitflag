@@ -53,9 +53,7 @@ abstract class Property extends Decorator implements JsonSerializable
     /** @var int [] */
     protected const OPTIONS = [];
 
-    protected $_source = 0;
-
-    public function __construct($source)
+    public function __construct(int $source)
     {
         parent::__construct((int)$source);
     }
