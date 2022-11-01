@@ -116,7 +116,7 @@ class Bitflag extends Decorator implements JsonSerializable
     public function __get(string $prop) : bool
     {
         $modifier = $this->getModifier($prop);
-        return $this->_source & $modifier === $modifier;
+        return ($this->_source & $modifier) === $modifier;
     }
 
     /**
