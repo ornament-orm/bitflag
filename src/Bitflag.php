@@ -8,6 +8,7 @@ use stdClass;
 use Ornament\Core\Decorator;
 use ReflectionClass;
 use ReflectionProperty;
+use ReflectionEnum;
 
 /**
  * Object to emulate a bitflag in Ornament models.
@@ -59,10 +60,14 @@ class Bitflag extends Decorator implements JsonSerializable
         settype($this->_source, 'int');
         $_options = $_target->getAttributes(Options::class);
         if (!$_options) {
-            throw new OptionsNotDefinedException;
+            throw new OptionsNotDefinedException($_target->class, $_target->name);
         }
         $_options = $_options[0]->newInstance();
         $enum = $_options->getEnum();
+        $reflection = new ReflectionEnum($enum);
+        if (!$reflection->isBacked() || $reflection->getBackingType()->__toString() !== 'int') {
+            throw new OptionsInvalidException($enum);
+        }
         $this->_options = $enum::cases();
     }
 
@@ -93,13 +98,11 @@ class Bitflag extends Decorator implements JsonSerializable
     public function __set(string $prop, bool $value)
     {
         $modifier = $this->getModifier($prop);
-        if ($modifier === 0) {
-        }
         $this->_source = (int)"$this";
         if ($value) {
             $this->_source |= $modifier;
         } else {
-            $this->_source &= $modifier;
+            $this->_source &= ~$modifier;
         }
     }
 
