@@ -1,6 +1,6 @@
 <?php
 
-use Ornament\Bitflag\{ Bitflag, Options };
+use Ornament\Bitflag\{ Bitflag, Options, FlagNotDefinedException, OptionsInvalidException };
 use Ornament\Core\Model;
 
 enum Status : int
@@ -33,9 +33,19 @@ return function () : Generator {
         $model->status->cats = true;
         $model->status->nice = true;
         assert("{$model->status}" === "3");
+        $model->status->nice = false;
+        assert("{$model->status}" === "2");
     };
 
     /** Using an illegal option throws an exception */
+    yield function () use (&$model) {
+        $e = null;
+        try {
+            $model->status->foo = true;
+        } catch (FlagNotDefinedException $e) {
+        }
+        assert($e instanceof FlagNotDefinedException);
+    };
 
     /** The model can be serialized after which it is a stdClass that contains the correct settings */
     yield function () use (&$model) {
@@ -46,6 +56,46 @@ return function () : Generator {
         assert($exported->code == false);
         assert($exported->cats == true);
         assert($exported->nice == true);
+    };
+
+    /** Using a non-backed enum for options throws an exception */
+    yield function () {
+        enum NonBacked
+        {
+            case whatever;
+        }
+
+        $e = null;
+        try {
+            $model = new class(['status' => 0]) {
+                use Model;
+
+                #[Options(NonBacked::class)]
+                public Bitflag $status;
+            };
+        } catch (OptionsInvalidException $e) {
+        }
+        assert($e instanceof OptionsInvalidException);
+    };
+
+    /** An enum with the wrong backing type throws an exception */
+    yield function () {
+        enum WrongBackingType : string
+        {
+            case whatever = 'talk to the hand';
+        }
+
+        $e = null;
+        try {
+            $model = new class(['status' => 0]) {
+                use Model;
+
+                #[Options(WrongBackingType::class)]
+                public Bitflag $status;
+            };
+        } catch (OptionsInvalidException $e) {
+        }
+        assert($e instanceof OptionsInvalidException);
     };
 };
 
