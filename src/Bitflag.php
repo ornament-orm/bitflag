@@ -84,8 +84,7 @@ class Bitflag extends Decorator implements JsonSerializable
     }
 
     /**
-     * Magic setter. Silently fails if the specified property was not available
-     * in the $valueMap used during construction.
+     * Magic setter.
      *
      * @param string $prop Name of the bit to set.
      * @param bool $value True to turn on, false to turn off.
