@@ -25,14 +25,14 @@ return function () : Generator {
         assert($model->status instanceof Bitflag);
         $model->status->code = true;
         $model->status->cats = true;
-        assert("{$model}" === "6");
+        assert("{$model->status}" === "6");
     };
 
     /** After changing some flags, they are correctly persisted and again after re-changing */
     yield function () use (&$model) {
         $model->status->cats = true;
         $model->status->nice = true;
-        assert("{$model}" === "3");
+        assert("{$model->status}" === "3");
     };
 
     /** Using an illegal option throws an exception */
