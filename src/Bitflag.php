@@ -141,8 +141,8 @@ class Bitflag extends Decorator implements JsonSerializable
     public function jsonSerialize() : stdClass
     {
         $ret = new stdClass;
-        foreach ($this->options as $enum) {
-            $ret->$name = (bool)($this->_source & $enum->value);
+        foreach ($this->_options as $enum) {
+            $ret->{$enum->name} = (bool)($this->_source & $enum->value);
         }
         return $ret;
     }
