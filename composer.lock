@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72f12771101a7b8e859abc0d71dfe983",
+    "content-hash": "df4dc30ee857aa98cf1e8a598c9e318a",
     "packages": [
         {
             "name": "ornament/core",
-            "version": "0.15.9",
+            "version": "0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ornament-orm/core.git",
-                "reference": "c055572d41be3e06909213f74cb4ed4efc8dfd03"
+                "reference": "60c03f6cf204c77a1e8e757ee7605e1699ef4628"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ornament-orm/core/zipball/c055572d41be3e06909213f74cb4ed4efc8dfd03",
-                "reference": "c055572d41be3e06909213f74cb4ed4efc8dfd03",
+                "url": "https://api.github.com/repos/ornament-orm/core/zipball/60c03f6cf204c77a1e8e757ee7605e1699ef4628",
+                "reference": "60c03f6cf204c77a1e8e757ee7605e1699ef4628",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
                 "toast/unit": "^2"
             },
             "suggest": {
-                "monolyth/formulaic": "PHP7 OO-forms with data binding for (Ornament) models"
+                "monolyth/formulaic": "PHP8 OO-forms with data binding for (Ornament) models"
             },
             "type": "library",
             "autoload": {
@@ -53,9 +53,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ornament-orm/core/issues",
-                "source": "https://github.com/ornament-orm/core/tree/0.15.9"
+                "source": "https://github.com/ornament-orm/core/tree/0.16.0"
             },
-            "time": "2022-10-20T14:34:38+00:00"
+            "time": "2022-11-01T15:10:57+00:00"
         }
     ],
     "packages-dev": [
@@ -777,16 +777,16 @@
         },
         {
             "name": "monomelodies/reflex",
-            "version": "0.3.6",
+            "version": "0.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monomelodies/reflex.git",
-                "reference": "25b40260c259ee27e36d497f59d66a8579bfd197"
+                "reference": "fe362bfda2cdc59344632f314420caac3604b41b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monomelodies/reflex/zipball/25b40260c259ee27e36d497f59d66a8579bfd197",
-                "reference": "25b40260c259ee27e36d497f59d66a8579bfd197",
+                "url": "https://api.github.com/repos/monomelodies/reflex/zipball/fe362bfda2cdc59344632f314420caac3604b41b",
+                "reference": "fe362bfda2cdc59344632f314420caac3604b41b",
                 "shasum": ""
             },
             "require": {
@@ -816,9 +816,9 @@
             "description": "Reflection utilities for PHP8+",
             "support": {
                 "issues": "https://github.com/monomelodies/reflex/issues",
-                "source": "https://github.com/monomelodies/reflex/tree/0.3.6"
+                "source": "https://github.com/monomelodies/reflex/tree/0.3.7"
             },
-            "time": "2022-09-24T11:59:57+00:00"
+            "time": "2022-10-21T13:02:19+00:00"
         },
         {
             "name": "psr/container",
@@ -1087,16 +1087,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.14",
+            "version": "v5.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "984ea2c0f45f42dfed01d2f3987b187467c4b16d"
+                "reference": "ea59bb0edfaf9f28d18d8791410ee0355f317669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/984ea2c0f45f42dfed01d2f3987b187467c4b16d",
-                "reference": "984ea2c0f45f42dfed01d2f3987b187467c4b16d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/ea59bb0edfaf9f28d18d8791410ee0355f317669",
+                "reference": "ea59bb0edfaf9f28d18d8791410ee0355f317669",
                 "shasum": ""
             },
             "require": {
@@ -1166,7 +1166,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.14"
+                "source": "https://github.com/symfony/console/tree/v5.4.15"
             },
             "funding": [
                 {
@@ -1182,7 +1182,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-07T08:01:20+00:00"
+            "time": "2022-10-26T21:41:52+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2095,16 +2095,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.1.6",
+            "version": "v6.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "7e7e0ff180d4c5a6636eaad57b65092014b61864"
+                "reference": "823f143370880efcbdfa2dbca946b3358c4707e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/7e7e0ff180d4c5a6636eaad57b65092014b61864",
-                "reference": "7e7e0ff180d4c5a6636eaad57b65092014b61864",
+                "url": "https://api.github.com/repos/symfony/string/zipball/823f143370880efcbdfa2dbca946b3358c4707e5",
+                "reference": "823f143370880efcbdfa2dbca946b3358c4707e5",
                 "shasum": ""
             },
             "require": {
@@ -2160,7 +2160,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.1.6"
+                "source": "https://github.com/symfony/string/tree/v6.1.7"
             },
             "funding": [
                 {
