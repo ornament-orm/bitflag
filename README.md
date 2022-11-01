@@ -5,15 +5,12 @@ For a model Foo with a property 'status', we often want to define a number of
 bitflags, e.g. 'status_on = 1', 'status_valid = 2' etc. The Bitflag decorator
 makes this easy.
 
-Create a class extending `Ornament\Bitflag\Property` defining the desired flags.
-Annotate the bitflag property with `@var Your\Implementing\Class` OR (as of
-PHP 7.4) type hint it as such.
+Create a backed enum defining the desired flags. Type hint the property to
+receive the `Bitflag` as such, and add the attribute `Ornament\Bitflag\Options`
+to said property. The argument to Options is the classname of your enum.
 
-To define allowed bitflags and their aliases, the `protected` const OPTIONS is
-used. It should contain a hash of name/bit pairs.
-
-All defined flags are now magically available for getting and setting as
-properties on the class instance:
+All defined cases of the enum are now magically available for getting and
+setting as properties on bitflag property:
 
 ```php
 <?php
@@ -23,18 +20,20 @@ properties on the class instance:
 <?php
 
 use Ornament\Core;
-use Ornament\Bitflag\Property;
+use Ornament\Bitflag\{ Bitflag, Options };
 
-class Status extends Property
+enum Status : int
 {
-    protected const OPTIONS = ['on' => 1, 'initialized' => 2];
+    case on = 1;
+    case initialized = 2;
 }
 
 class Model
 {
     use Core\Model;
 
-    public Status $status;
+    #[Options(Status::class)]
+    public Bitflag $status;
 }
 
 $model = Model::fromIterable(['status' => 3]);
@@ -52,27 +51,13 @@ will be exported. Similarly, the `getArrayCopy` method will return a hash of
 flags/bits where the bit was set to true.
 
 ## Accessing the underlying bit value
-One may use the `getBit($property)` method to access the underlying bit value of
-a property. In the above example, `$model->status->getBit('on')` would yield
-`1`.
-
-An alternative strategy would be to define all bitflags as `public const`ants on
-the bitflag property class, and reference those in the `OPTIONS` definition:
-
-```php
-<?php
-
-class Status extends Ornament\Bitflag\Property
-{
-    public const ON = 1;
-
-    public const INITIALIZED = 2;
-
-    protected const OPTIONS = [
-        'on' => Status::ON,
-        'initialized' => Status::INITIALIZED,
-    ];
-}
+You don't need to; simply use the backed enum:
 
 ```
+<?php
+
+echo Status::on->value; // 1
+```
+
+Similarly, use `Status::cases()` if you need all possible values.
 
