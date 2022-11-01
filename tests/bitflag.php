@@ -1,15 +1,13 @@
 <?php
 
-use Ornament\Bitflag\Property;
+use Ornament\Bitflag\{ Bitflag, Options };
 use Ornament\Core\Model;
 
-class Status extends Property
+enum Status : int
 {
-    protected const OPTIONS = [
-        'nice' => 1,
-        'cats' => 2,
-        'code' => 4,
-    ];
+    case nice = 1;
+    case cats = 2;
+    case code = 4;
 }
 
 return function () : Generator {
@@ -17,26 +15,29 @@ return function () : Generator {
         $model = new class(['status' => 0]) {
             use Model;
 
-            public Status $status;
+            #[Options(Status::class)]
+            public Bitflag $status;
         };
     });
 
-    /** On a type hinted model, @var is turned into a bitflag. */
+    /** On a type hinted model, a property is turned into a bitflag */
     yield function () use (&$model) {
-        assert($model->status instanceof Status);
+        assert($model->status instanceof Bitflag);
         $model->status->code = true;
         $model->status->cats = true;
-        assert("{$model->status}" === "6");
+        assert("{$model}" === "6");
     };
 
-    /** After changing some flags, they are correctly persisted and again after re-changing. */
+    /** After changing some flags, they are correctly persisted and again after re-changing */
     yield function () use (&$model) {
         $model->status->cats = true;
         $model->status->nice = true;
-        assert("{$model->status}" === "3");
+        assert("{$model}" === "3");
     };
 
-    /** The model can be serialized after which it is a stdClass that contains the correct settings. */
+    /** Using an illegal option throws an exception */
+
+    /** The model can be serialized after which it is a stdClass that contains the correct settings */
     yield function () use (&$model) {
         $model->status->cats = true;
         $model->status->nice = true;
