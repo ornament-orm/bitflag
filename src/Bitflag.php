@@ -42,7 +42,7 @@ use ReflectionEnum;
  *     public Property $status;
  * }
  *
- * $model = Model::fromIterable(['status' => 3]);
+ * $model = new Model(['status' => 3]);
  *
  * // Now this works, assuming `$model` is the instance:
  * var_dump($model->status->on); // true in this example, since 3 & 1 = 1
