@@ -14,8 +14,8 @@ use ReflectionEnum;
  * Object to emulate a bitflag in Ornament models.
  *
  * For a model Foo with a property 'status', we often want to define a number of
- * bitflags, e.g. 'status_on = 1', 'status_valid = 2' etc. The Bitflag decorator
- * makes this easy.
+ * bitflags, e.g. 'on = 1', 'valid = 2' etc. The Bitflag decorator makes this
+ * easy.
  *
  * Type hint the bitflag property with `Ornament\Bitflag\Bitflag`. Also, add an
  * attribute of type `Ornament\Bitflag\Options` to the property. Its argument is
@@ -26,7 +26,7 @@ use ReflectionEnum;
  *
  * <code>
  * use Ornament\Core;
- * use Ornament\Bitflag\{ Property, Options };
+ * use Ornament\Bitflag\{ Bitflag, Options };
  *
  * enum Status : int
  * {
@@ -39,7 +39,7 @@ use ReflectionEnum;
  *     use Core\Model;
  *
  *     #[Options(Status::class)]
- *     public Property $status;
+ *     public Bitflag $status;
  * }
  *
  * $model = new Model(['status' => 3]);
