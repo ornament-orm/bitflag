@@ -2,8 +2,7 @@
 Bitflag decorator for Ornament ORM
 
 For a model Foo with a property 'status', we often want to define a number of
-bitflags, e.g. 'status_on = 1', 'status_valid = 2' etc. The Bitflag decorator
-makes this easy.
+bitflags, e.g. 'on = 1', 'valid = 2' etc. The Bitflag decorator makes this easy.
 
 Create a backed enum defining the desired flags. Type hint the property to
 receive the `Bitflag` as such, and add the attribute `Ornament\Bitflag\Options`
